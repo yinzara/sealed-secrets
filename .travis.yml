@@ -36,19 +36,10 @@ addons:
       - wget
       - ca-certificates
 
-before_script:
-  - |
-    if [[ ! -d $GOPATH/src/github.com/bitnami-labs/sealed-secrets ]]; then
-      ln -s `pwd` $GOPATH/src/github.com/bitnami-labs/sealed-secrets
-      mkdir -p $GOPATH/src/github.com/bitnami-labs
-    fi
-
 before_install:
   - |
-    if [[ ! -d $GOPATH/src/github.com/bitnami-labs/sealed-secrets ]]; then
-      ln -s `pwd` $GOPATH/src/github.com/bitnami-labs/sealed-secrets
-      mkdir -p $GOPATH/src/github.com/bitnami-labs
-    fi
+    RepoName=`basename $PWD`; SrcDir=`dirname $PWD`; DestDir="`dirname $SrcDir`/bitnami-labs"
+    if [[ "$SrcDir" != "$DestDir" ]]; then mv "$SrcDir" "$DestDir"; cd ../../bitnami-labs/$RepoName; export TRAVIS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/$RepoName; fi
   - set -e
 
 install:
