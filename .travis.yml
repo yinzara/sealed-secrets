@@ -41,6 +41,7 @@ before_script:
   - cd $GOPATH/src/github.com/bitnami-labs/sealed-secrets
 
 before_install:
+  - mkdir -p $GOPATH/src/github.com/bitnami-labs/sealed-secrets
   - cd $GOPATH/src/github.com/bitnami-labs/sealed-secrets
   - set -e
 
