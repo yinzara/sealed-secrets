@@ -37,12 +37,18 @@ addons:
       - ca-certificates
 
 before_script:
-  - mkdir -p $GOPATH/src/github.com/bitnami-labs/sealed-secrets
-  - cd $GOPATH/src/github.com/bitnami-labs/sealed-secrets
+  - |
+    if [[ ! -d $GOPATH/src/github.com/bitnami-labs/sealed-secrets ]]; then
+      ln -s `pwd` $GOPATH/src/github.com/bitnami-labs/sealed-secrets
+      mkdir -p $GOPATH/src/github.com/bitnami-labs
+    fi
 
 before_install:
-  - mkdir -p $GOPATH/src/github.com/bitnami-labs/sealed-secrets
-  - cd $GOPATH/src/github.com/bitnami-labs/sealed-secrets
+  - |
+    if [[ ! -d $GOPATH/src/github.com/bitnami-labs/sealed-secrets ]]; then
+      ln -s `pwd` $GOPATH/src/github.com/bitnami-labs/sealed-secrets
+      mkdir -p $GOPATH/src/github.com/bitnami-labs
+    fi
   - set -e
 
 install:
